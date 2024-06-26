@@ -8,9 +8,11 @@ import { BeneficiosModule } from './beneficios/beneficios.module';
 import { TransaccionesModule } from './transacciones/transacciones.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     MongooseModule.forRoot('mongodb://127.0.0.1/ScaryClub'),
     ClientesModule,
     UsersModule,

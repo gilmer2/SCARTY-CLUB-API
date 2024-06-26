@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -40,11 +40,23 @@ export class AuthService {
     const { email, password, username } = registerUserDto;
     const userExists = await this.userModel.exists({ email });
     if (userExists) {
-      throw new ConflictException('Email already exists');
+      throw new UnauthorizedException({
+				success: false,
+				error: 403,
+				title: 'Usuario bloqueado',
+				message: 'La contraseña del usuario no es correcta',
+				data: []
+			});
     }
     const clientExists = await this.clientModel.exists({ email });
     if (clientExists) {
-      throw new ConflictException('Email already exists');
+      throw new UnauthorizedException({
+				success: false,
+				error: 403,
+				title: 'Usuario bloqueado',
+				message: 'La contraseña del usuario no es correcta',
+				data: []
+			});
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const createdUser = new this.userModel({
@@ -60,21 +72,39 @@ export class AuthService {
     const { email, password } = loginDto;
     const client = await this.clientModel.findOne({ email });
     if (client && (await bcrypt.compare(password, client.password))) {
-      return this.generateToken(client);
+      const token = this.generateToken(client);
+      return {
+        success: true,
+        error: 0,
+        title: 'Acción realizada exitosamente',
+        message: 'Registros recuperados correctamente',
+        data: token
+      };
     }
 
     const user = await this.userModel.findOne({ email });
     if (user && (await bcrypt.compare(password, user.password))) {
-      return this.generateToken(user);
+      const token = this.generateToken(user)
+      return {
+        success: true,
+        error: 0,
+        title: 'Acción realizada exitosamente',
+        message: 'Registros recuperados correctamente',
+        data: token
+      };
     }
 
-    throw new Error('Invalid credentials de');
+    throw new UnauthorizedException({
+      success: false,
+      error: 403,
+      title: 'Usuario bloqueado',
+      message: 'La contraseña del usuario no es correcta',
+      data: []
+    });
   }
 
   private generateToken(user: any) {
     const payload = { email: user.email, sub: user._id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload)
   }
 }
