@@ -27,4 +27,7 @@ export class CreateClientDto {
 
   @ApiProperty()
   password: string;
+
+  @ApiProperty()
+  role: string;
 }

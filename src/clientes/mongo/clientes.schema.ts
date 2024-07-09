@@ -29,6 +29,9 @@ export class Client extends Document {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({ required: true })
+  role: string;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);
