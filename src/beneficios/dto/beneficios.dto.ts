@@ -6,4 +6,13 @@ export class CreateBeneficioDto {
 
   @ApiProperty()
   description: string;
+
+  @ApiProperty()
+  image: string;
+
+  @ApiProperty()
+  status: boolean;
+
+  @ApiProperty()
+  mark: string;
 }

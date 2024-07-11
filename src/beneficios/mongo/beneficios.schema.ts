@@ -8,6 +8,15 @@ export class Beneficio extends Document {
 
   @Prop()
   description: string;
+
+  @Prop()
+  image: string;
+
+  @Prop()
+  status: boolean;
+
+  @Prop()
+  mark: string;
 }
 
 export const BeneficioSchema = SchemaFactory.createForClass(Beneficio);

@@ -9,4 +9,8 @@ export class CreateRewardDto {
 
   @ApiProperty()
   points: number;
+
+  @ApiProperty()
+  image: string;
+  
 }
