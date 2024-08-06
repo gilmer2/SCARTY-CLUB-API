@@ -18,4 +18,21 @@ export class BeneficiosService {
   async findAll(): Promise<Beneficio[]> {
     return this.beneficioModel.find().exec();
   }
+
+  async update(
+    id: string,
+    updateBeneficioDto: CreateBeneficioDto,
+  ): Promise<Beneficio> {
+    return this.beneficioModel.findByIdAndUpdate(id, updateBeneficioDto, {
+      new: true,
+    });
+  }
+
+  async delete(id: string): Promise<Beneficio> {
+    return this.beneficioModel.findByIdAndDelete(id);
+  }
+
+  async findOne(id: string): Promise<Beneficio> {
+    return this.beneficioModel.findById(id);
+  }
 }

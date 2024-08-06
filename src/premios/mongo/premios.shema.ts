@@ -14,6 +14,9 @@ export class Reward extends Document {
 
   @Prop()
   image: string;
+
+  @Prop()
+  active: boolean;
 }
 
 export const RewardSchema = SchemaFactory.createForClass(Reward);

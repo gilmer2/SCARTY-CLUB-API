@@ -58,6 +58,9 @@ export class AuthService {
 				data: []
 			});
     }
+
+    
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const createdUser = new this.userModel({
       username,
@@ -90,7 +93,7 @@ export class AuthService {
         error: 0,
         title: 'Acción realizada exitosamente',
         message: 'Registros recuperados correctamente',
-        data: token
+        data: token,
       };
     }
 

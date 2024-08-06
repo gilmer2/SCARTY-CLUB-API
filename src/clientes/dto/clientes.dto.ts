@@ -17,7 +17,10 @@ export class CreateClientDto {
   email: string;
 
   @ApiProperty()
-  state: string;
+  photo: string;
+
+  @ApiProperty()
+  state: boolean;
 
   @ApiProperty()
   city: string;

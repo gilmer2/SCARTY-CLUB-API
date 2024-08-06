@@ -18,4 +18,17 @@ export class PremiosService {
   async findAll(): Promise<Reward[]> {
     return this.premioModel.find().exec();
   }
+
+  async findOne(id: string): Promise<Reward> {
+    return this.premioModel.findById(id);
+  }
+
+  async update(id: string, updatePremioDto: CreateRewardDto): Promise<Reward> {
+    return this.premioModel.findByIdAndUpdate(id , updatePremioDto, { new: true });
+  }
+
+  async remove(id: string): Promise<Reward> {
+    return this.premioModel.findByIdAndDelete(id);
+  }
+      
 }

@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { ProductModule } from './product/product.module';
 import { MarkModule } from './mark/mark.module';
+import { UploadModule } from './upload/upload.module';
+import { CartShopModule } from './cart-shop/cart-shop.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { MarkModule } from './mark/mark.module';
     AuthModule,
     ProductModule,
     MarkModule,
+    UploadModule,
+    CartShopModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PremiosService } from './premios.service';
 import { Reward } from './mongo/premios.shema';
@@ -17,5 +17,20 @@ export class PremiosController {
   @Get()
   async findAll(): Promise<Reward[]> {
     return this.premiosService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Reward> {
+    return this.premiosService.findOne(id);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string): Promise<Reward> {
+    return this.premiosService.remove(id);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updatePremioDto: CreateRewardDto): Promise<Reward> {
+    return this.premiosService.update(id, updatePremioDto);
   }
 }

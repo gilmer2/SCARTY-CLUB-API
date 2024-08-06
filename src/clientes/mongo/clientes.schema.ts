@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Client extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   mobilePhone: string;
 
   @Prop({ required: true })
@@ -19,7 +19,10 @@ export class Client extends Document {
   email: string;
 
   @Prop({ required: true })
-  state: string;
+  photo: string;
+
+  @Prop({ required: true })
+  state: boolean;
 
   @Prop({ required: true })
   city: string;

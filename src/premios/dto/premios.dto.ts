@@ -13,4 +13,6 @@ export class CreateRewardDto {
   @ApiProperty()
   image: string;
   
+  @ApiProperty()
+  active: boolean;
 }
